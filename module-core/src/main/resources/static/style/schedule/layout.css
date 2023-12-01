@@ -1,0 +1,154 @@
+@charset "utf-8";
+
+/* 대시보드 헤더 스타일링 */
+.header-dashboard {
+  top: 0;
+  position: sticky;
+  margin-left: 10rem;
+  background: var(--white);
+  z-index: 999;
+}
+.header-dashboard .area-user-info {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--gray-400);
+}
+.header-dashboard .area-user-info .image-user {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 100%;
+}
+.header-dashboard .area-user-name {
+  margin-left: 0.25rem;
+  cursor: pointer;
+}
+.header-dashboard .area-user-name .user-name {
+  margin-left: 0.5rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.header-dashboard .area-user-name .user-role {
+  margin-left: 0.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* 대시보드 메뉴 스타일링 */
+.area-dashboard-menu {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 10rem;
+  padding-top: 1.5rem;
+  border-right: 1px solid var(--gray-400);
+  flex-direction: column;
+  z-index: 999;
+}
+.area-dashboard-menu-logo {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-400);
+}
+.area-dashboard-menu-logo .image-logo {
+  height: 2rem;
+}
+.area-ul-dashboard-menu {
+  padding: 1.5rem 1rem;
+  margin-top: -1rem;
+}
+.area-ul-dashboard-menu a {
+  display: flex;
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0.25rem;
+  align-items: center;
+  font-weight: 500;
+}
+.area-ul-dashboard-menu a:hover {
+  background: var(--gray-200);
+}
+.area-ul-dashboard-menu li:nth-child(4) {
+  margin-bottom: 2rem;
+}
+.area-dashboard-menu .area-dashboard-creator {
+  margin-top: 41.5rem;
+}
+
+/* 대시보드 본문 스타일링 */
+.area-dashboard {
+  padding-top: 1.25rem;
+  padding-left: 11.5rem;
+  padding-right: 1.5rem;
+  margin-bottom: 10rem;
+}
+/* 대시보드 액션 버튼 스타일링 */
+.area-dashboard-action ul {
+  display: flex;
+  align-items: center;
+}
+
+/* 대시보드 메뉴 경로 스타일링 */
+.area-dashboard-route {
+  display: flex;
+  justify-content: space-between;
+}
+.area-dashboard-route ul {
+  display: inline-flex;
+}
+.area-dashboard-route li {
+  display: flex;
+  align-items: center;
+}
+.area-dashboard-route li i {
+  font-size: 1.25rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  color: var(--blue-900);
+}
+.area-dashboard-route .li-parent-name {
+  font-weight: 500;
+}
+.area-dashboard-route .li-child-name {
+  font-weight: 700;
+}
+
+/* 대시보드 제목 스타일링 */
+.area-dashboard-title {
+  margin-top: 1.15rem;
+}
+.area-dashboard-title .text-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+.area-dashboard-title .text-comment {
+  margin-top: 0.25rem;
+  color: var(--gray-900);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+/* 대시보드 액션 버튼 스타일링 */
+.area-dashboard-action {
+  display: flex;
+  margin-top: 2.3rem;
+  margin-bottom: 2.55rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+.area-dashboard-action button {
+  width: auto;
+  padding: 0.15rem 0.5rem;
+  margin-right: 0.65rem;
+  font-size: 0.875rem;
+}

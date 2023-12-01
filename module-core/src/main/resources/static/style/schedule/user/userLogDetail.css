@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+/**
+ * 사용자 로그 영역
+ */
+.area-user-log {
+  max-width: 60rem;
+}
+.area-user-log h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.area-user-log p {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.area-user-log label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+.area-user-log input {
+  width: 21rem;
+  height: 2.1rem;
+  display: block;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+  border: 1px solid var(--gray-500);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+}
+.area-user-log textarea {
+  width: 21rem;
+  height: 21rem;
+  display: block;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+  border: 1px solid var(--gray-500);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+}
+.area-user-log .area-log-default,
+.area-user-log .area-log-message,
+.area-user-log .area-log-extra {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: start;
+  flex-wrap: wrap;
+  max-width: 60rem;
+}
+.area-user-log .area-log-default-left,
+.area-user-log .area-log-message-left,
+.area-user-log .area-log-extra-left {
+  width: 15rem;
+  margin-right: 1rem;
+}
+.area-user-log .area-log-default-right,
+.area-user-log .area-log-message-right,
+.area-user-log .area-log-extra-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-user-log .area-log-extra-right > div {
+  margin-bottom: 0.25rem;
+}
+.area-user-log .label-log-register,
+.area-user-log .label-log-type,
+.area-user-log .label-log-time {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}

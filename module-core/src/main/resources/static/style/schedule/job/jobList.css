@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+/* 작업 목록 테이블 컬럼 스타일링 */
+.area-job-list .th-job-seq,
+.area-job-list .td-job-seq {
+  width: 3rem;
+  text-align: center;
+}
+.area-job-list .th-job-name,
+.area-job-list .th-job-group,
+.area-job-list .td-job-name,
+.area-job-list .td-job-group {
+  width: 6rem;
+  text-align: left;
+}
+.area-job-list .th-job-register,
+.area-job-list .td-job-register {
+  width: 3rem;
+  text-align: center;
+}
+.area-job-list .th-job-store,
+.area-job-list .td-job-store {
+  width: 3rem;
+  text-align: center;
+}
+.area-job-list .th-job-state,
+.area-job-list .td-job-state {
+  width: 3rem;
+  text-align: center;
+}
+.area-job-list .th-job-action,
+.area-job-list .td-job-action {
+  width: 6rem;
+  text-align: center;
+}

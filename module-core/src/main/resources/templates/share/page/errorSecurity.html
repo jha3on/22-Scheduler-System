@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>스케줄러 :: 시스템 오류</title>
+</head>
+
+<body>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    let forward = /*[[ ${forward} ]]*/;
+    let message = /*[[ ${message} ]]*/;
+
+    alert(message);
+    window.location.href = forward;
+    /*]]>*/
+  </script>
+</body>
+
+</html>

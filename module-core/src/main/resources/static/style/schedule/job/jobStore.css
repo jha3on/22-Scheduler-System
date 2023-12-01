@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+/**
+ * 작업 등록 영역
+ */
+.area-form-job-store {
+  max-width: 60rem;
+}
+.area-form-job-store .check {
+  display: block;
+  padding-top: 0.25rem;
+  padding-left: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.area-form-job-store .class-data + .check {
+  padding-top: 0;
+}
+.area-form-job-store h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.area-form-job-store p {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.area-form-job-store input {
+  width: 21rem;
+  height: 2.1rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+}
+.area-form-job-store select {
+  width: 5rem;
+  height: 2.1rem;
+  padding: 0.25rem;
+}
+.area-form-job-store textarea {
+  width: 42.5rem;
+  height: 21rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+}
+.area-form-job-store input,
+.area-form-job-store select,
+.area-form-job-store textarea {
+  border: 1px solid var(--gray-500);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+}
+.area-form-job-store .area-field-job-default,
+.area-form-job-store .area-field-job-execution,
+.area-form-job-store .area-field-job-data {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: start;
+  flex-wrap: wrap;
+  max-width: 60rem;
+}
+.area-form-job-store .area-field-job-default-left,
+.area-form-job-store .area-field-job-execution-left,
+.area-form-job-store .area-field-job-data-left {
+  width: 15rem;
+  margin-right: 1rem;
+}
+.area-form-job-store .area-field-job-default-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-job-store .area-field-job-execution-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 43rem;
+}
+.area-form-job-store .area-field-job-data-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-job-store .area-field-job-class-name input {
+  width: 37rem;
+}
+.area-form-job-store .area-field-job-class-comment input {
+  width: 42.5rem;
+}
+/*.job-create-section-bottom-container {*/
+/*  margin-top: 3rem;*/
+/*}*/

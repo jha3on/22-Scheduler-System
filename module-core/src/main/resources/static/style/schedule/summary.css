@@ -1,0 +1,127 @@
+@charset "utf-8";
+
+/**
+ * 시스템 요약 영역
+ */
+.area-system-summary {
+  max-width: 60rem;
+}
+.area-system-summary h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.area-system-summary p {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.area-system-summary .area-job-summary,
+.area-system-summary .area-user-summary {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: start;
+  flex-wrap: wrap;
+  max-width: 60rem;
+}
+.area-system-summary .area-job-summary-left,
+.area-system-summary .area-user-summary-left {
+  width: 10rem;
+  margin-right: 1rem;
+}
+.area-system-summary .area-job-summary-right,
+.area-system-summary .area-user-summary-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.area-system-summary li {
+  display: flex;
+  align-items: end;
+  margin: 0 0.25rem 1rem 0.25rem;
+}
+.area-system-summary li:before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  left: -0.68rem;
+  top: -1.05rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 0.125rem solid var(--white);
+  background: var(--black);
+  border-radius: 50%;
+}
+.area-system-summary li:hover:before {
+  border: 0.125rem solid var(--black);
+  background: var(--black);
+}
+.area-system-summary li div {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.45rem;
+  padding: 0.325rem 0.375rem;
+  background: var(--dark-100);
+  border-radius: 0.425rem;
+  cursor: default;
+}
+.area-system-summary li div:hover {
+  background: var(--dark-150);
+}
+.area-system-summary li div:hover div {
+  background: var(--dark-150);
+}
+.area-system-summary li div:first-child {
+  margin-left: 1.25rem;
+}
+.area-system-summary li div:first-child:before {
+  content: '···';
+  margin-left: -0.3rem;
+  display: inline-block;
+  position: relative;
+  top: 0.425rem;
+  left: -1.35rem;
+  height: 0;
+  color: var(--black);
+}
+.area-system-summary .label-log-item {
+  font-weight: 600;
+}
+.area-system-summary li div a {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.area-system-summary li div span {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.area-system-summary .area-label-job-log-time,
+.area-system-summary .area-label-user-log-time {
+  width: 7.5rem;
+}
+.area-system-summary .area-label-job-log-number,
+.area-system-summary .area-label-user-log-number {
+  width: 4.5rem;
+}
+.area-system-summary .area-label-job-schedule-log-number,
+.area-system-summary .area-label-user-schedule-log-number {
+  width: 5rem;
+}
+.area-system-summary .container-area-user-schedule-log-number {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+.area-system-summary .area-label-user-log-user {
+  width: 5rem;
+}
+.area-system-summary .area-label-job-log-message {
+  width: 15.4rem;
+}
+.area-system-summary .area-label-user-log-message {
+  width: 10rem;
+}
+.area-system-summary .area-label-job-log-type,
+.area-system-summary .area-label-user-log-type {
+  width: 5.25rem;
+}

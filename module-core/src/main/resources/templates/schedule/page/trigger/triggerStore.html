@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 트리거 등록</title>
+  <link th:href="@{/style/schedule/trigger/triggerStore.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '트리거', child = '등록')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '트리거 등록', comment = ': 작업을 실행하는 새로운 트리거를 등록합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" th:text="${'입력 초기화'}" onclick="app.clearForm()"></button></li>
+        <li><button type="button" class="button-gray" th:text="${'트리거 등록'}" onclick="schedule.onTriggerStoreHandler()"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 트리거 등록 영역 -->
+      <div class="area-trigger-store">
+        <form class="area-form-trigger-store">
+          <!-- 트리거 등록 기본 정보 -->
+          <div class="area-field-trigger-default">
+            <div class="area-field-trigger-default-left">
+              <h2 class="essential-asterisk">기본 정보</h2>
+              <p>: 작업 이름, 그룹을 확인합니다.</p>
+            </div>
+            <div class="area-field-trigger-default-right">
+              <div class="area-field-job-name">
+                <label for="jobName">
+                  <input id="jobName" class="job-name" type="text" th:value="${jobName}" readonly />
+                </label>
+              </div>
+              <div class="area-field-job-group">
+                <label for="jobGroup">
+                  <input id="jobGroup" class="job-group" type="text" th:value="${jobGroup}" readonly />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 트리거 등록 실행 정보 -->
+          <div class="area-field-trigger-execution">
+            <div class="area-field-trigger-execution-left">
+              <h2 class="essential-asterisk">실행 정보</h2>
+              <p>: 트리거 실행 유형과 정책을 선택합니다.</p>
+              <p>: 트리거 반복 실행 조건을 작성합니다.</p>
+            </div>
+            <div class="area-field-trigger-execution-right">
+              <div class="area-field-trigger-class-type">
+                <label for="classType">
+                  <select id="classType" name="class-type" onblur="app.removeCheckMessage(this)" >
+                    <option th:each="type: ${T(system.core.enums.schedule.TriggerClassType).values()}"
+                            th:text="${type.value}"
+                            th:value="${type.name}">
+                  </select>
+                </label>
+              </div>
+              <div class="area-field-trigger-policy-type">
+                <label for="policyType">
+                  <select id="policyType" name="policy-type" onblur="app.removeCheckMessage(this)" >
+                    <option th:each="type: ${T(system.core.enums.schedule.TriggerPolicyType).values()}"
+                            th:text="${type.value}"
+                            th:value="${type.name}">
+                  </select>
+                </label>
+              </div>
+              <div class="area-field-repeat-count">
+                <label for="repeatCount">
+                  <input id="repeatCount" class="repeat-count" type="text" placeholder="(SP) 반복 실행 횟수" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+              <div class="area-field-repeat-interval">
+                <label for="repeatInterval">
+                  <input id="repeatInterval" class="repeat-interval" type="text" placeholder="(SP) 반복 실행 간격 (초 단위)" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+              <div class="area-field-repeat-expression">
+                <label for="repeatExpression">
+                  <input id="repeatExpression" class="repeat-expression" type="text" placeholder="(CR) 반복 실행 표현식" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 트리거 등록 시간 정보 -->
+          <div class="area-field-trigger-datetime">
+            <div class="area-field-trigger-datetime-left">
+              <h2 class="essential-asterisk">시간 정보</h2>
+              <p>: 트리거 시작, 종료 시간을 작성합니다.</p>
+            </div>
+            <div class="area-field-trigger-datetime-right">
+              <div class="area-field-start-time">
+                <label for="startTime">
+                  <input id="startTime" class="start-time" type="text" placeholder="시작 시간" oninput="app.formatDateTime(this)" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+              <div class="area-field-stop-time">
+                <label for="stopTime">
+                  <input id="stopTime" class="stop-time" type="text" placeholder="종료 시간" oninput="app.formatDateTime(this)" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

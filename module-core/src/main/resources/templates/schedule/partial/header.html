@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="header-fragment">
+  <header class="header-dashboard">
+    <!-- 사용자 정보 영역 -->
+    <div class="area-user-info">
+      <!-- 사용자 아이콘 영역 -->
+      <div class="area-user-image">
+        <img class="image-user" src="/image/user.svg" alt="icon" />
+      </div>
+      <!-- 사용자 이름 영역 (principal.username, principal.authorities) -->
+      <div class="area-user-name" th:onclick="|location.href='@{/user/profile}'|">
+        <p class="user-name" sec:authentication="principal.user.userName"></p>
+        <p class="user-role" sec:authentication="principal.authorities"></p>
+      </div>
+    </div>
+  </header>
+</th:block>
+
+</html>

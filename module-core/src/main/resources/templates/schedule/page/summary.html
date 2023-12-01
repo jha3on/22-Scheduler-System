@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 시스템 요약</title>
+  <link th:href="@{/style/schedule/summary.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard"
+           th:with="jobLogListPage = @{/job/log},
+                    userLogListPage = @{/user/log}">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '시스템', child = '요약')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '시스템 요약', comment = ': 시스템의 요약 로그를 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+        <li><button type="button" class="button-dark unclickable" th:text="${'전체 작업 (' + jobCount} + '개)'"></button></li>
+        <li><button type="button" class="button-dark unclickable" th:text="${'실행 작업 (' + jobCountByRunning} + '개)'"></button></li>
+        <li><button type="button" class="button-dark unclickable" th:text="${'완료 작업 (' + jobCountByComplete} + '개)'"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 시스템 요약 영역 -->
+      <div class="area-system-summary">
+        <!-- 작업 로그 요약 영역 -->
+        <div class="area-job-summary">
+          <div class="area-job-summary-left">
+            <h2 class="essential-asterisk">작업 로그 기록</h2>
+            <p th:text="${'전체 로그: ' + jobLogCount + '개'}"></p>
+          </div>
+          <div class="area-job-summary-right">
+            <ul class="ul-area-log-list">
+              <li th:each="jobLog : ${jobLogList}"
+                  th:with="jobDetailPage = @{/job/{jobSeq}(jobSeq = ${jobLog.jobSeq})},
+                           jobLogDetailPage = @{/job/log/{logSeq}(logSeq = ${jobLog.logSeq})}">
+                <div class="area-label-job-log-time">
+                  <span class="label-log-item">로그 시간</span>
+                  <span th:text="${#temporals.format(#temporals.createDateTime(jobLog.logTime, 'yyyy-MM-dd HH:mm:ss'), 'MM월 dd일 HH:mm:ss')}"></span>
+                </div>
+                <div class="area-label-job-log-number">
+                  <span class="label-log-item">로그 번호</span>
+                  <a class="link-navy" th:text="${'#' + jobLog.logSeq}" th:href="@{${jobLogDetailPage}}"></a>
+                </div>
+                <div class="area-label-job-schedule-log-number">
+                  <span class="label-log-item">작업 번호</span>
+                  <a class="link-navy" th:text="${'#' + jobLog.jobSeq}" th:href="@{${jobDetailPage}}"></a>
+                </div>
+                <div class="area-label-job-log-message">
+                  <span class="label-log-item">로그 메시지</span>
+                  <span th:text="${jobLog.logResult}"></span>
+                </div>
+                <div class="area-label-job-log-type">
+                  <span class="label-log-item">로그 유형</span>
+                  <span th:text="${jobLog.logState}"></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 사용자 로그 요약 영역 -->
+        <div class="area-user-summary">
+          <div class="area-user-summary-left">
+            <h2 class="essential-asterisk">사용자 로그 기록</h2>
+            <p th:text="${'전체 로그: ' + userLogCount + '개'}"></p>
+          </div>
+          <div class="area-user-summary-right">
+            <ul class="ul-area-log-list">
+              <li th:each="userLog : ${userLogList}"
+                  th:with="jobDetailPage = @{/job/{jobSeq}(jobSeq = ${userLog.jobSeq})},
+                           triggerDetailPage = @{/trigger/{triggerSeq}(triggerSeq = ${userLog.triggerSeq})},
+                           userLogDetailPage = @{/user/log/{logSeq}(logSeq = ${userLog.logSeq})}">
+                <div class="area-label-user-log-time">
+                  <span class="label-log-item">로그 시간</span>
+                  <span th:text="${#temporals.format(#temporals.createDateTime(userLog.logTime, 'yyyy-MM-dd HH:mm:ss'), 'MM월 dd일 HH:mm:ss')}"></span>
+                </div>
+                <div class="area-label-user-log-number">
+                  <span class="label-log-item">로그 번호</span>
+                  <a class="link-navy" th:text="${'#' + userLog.logSeq}" th:href="@{${userLogDetailPage}}"></a>
+                </div>
+                <div class="area-label-user-schedule-log-number">
+                  <span class="label-log-item">스케줄 번호</span>
+                  <div class="container-area-user-schedule-log-number">
+                    <a class="link-navy" th:text="${'#' + userLog.jobSeq}" th:href="@{${jobDetailPage}}"></a>
+                    <span>:</span>
+                    <a class="link-navy" th:text="${'#' + userLog.triggerSeq}" th:href="@{${triggerDetailPage}}"></a>
+                  </div>
+                </div>
+                <div class="area-label-user-log-user">
+                  <span class="label-log-item">로그 사용자</span>
+                  <span th:text="${userLog.logRegister}"></span>
+                </div>
+                <div class="area-label-user-log-message">
+                  <span class="label-log-item">로그 메시지</span>
+                  <span th:text="${userLog.logResult}"></span>
+                </div>
+                <div class="area-label-user-log-type">
+                  <span class="label-log-item">로그 유형</span>
+                  <span th:text="${userLog.logType}"></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

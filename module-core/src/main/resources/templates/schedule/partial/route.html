@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="route-fragment">
+  <div class="area-dashboard-route">
+    <!-- 메뉴 경로 영역 -->
+    <ul class="ul-area-dashboard-route">
+      <li class="li-parent-name">
+        <p th:text="${parent}"></p>
+        <i class="ic-arrow-right"></i>
+      </li>
+      <li class="li-child-name">
+        <p th:text="${child}"></p>
+      </li>
+    </ul>
+  </div>
+</th:block>
+
+</html>

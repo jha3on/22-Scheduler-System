@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="menu-fragment">
+  <nav class="area-dashboard-menu">
+    <!-- 스케줄 메뉴 영역 -->
+    <div class="area-dashboard-menu-logo">
+      <a th:href="@{/summary}">
+        <img class="image-logo" src="/image/logo-title.svg" alt="logo" />
+      </a>
+    </div>
+    <!-- 스케줄 메뉴 리스트 영역 -->
+    <div class="area-ul-dashboard-menu">
+      <ul>
+        <li>
+          <a th:href="@{/job/list}">
+            <span>작업 목록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/job/log}">
+            <span>작업 로그 목록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/trigger/list}">
+            <span>트리거 목록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/trigger/log}">
+            <span>트리거 로그 목록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/user/list}">
+            <span>사용자 목록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/user/log}">
+            <span>사용자 로그 목록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/user/manual}">
+            <span>사용자 매뉴얼</span>
+          </a>
+        </li>
+        <li>
+          <a onclick="secure.onLogoutHandler()">
+            <span>사용자 로그아웃</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="area-dashboard-creator">
+      <button th:onclick="|location.href='https://github.com/arcfty'|">
+        GitHub: @arcfty
+      </button>
+    </div>
+  </nav>
+</th:block>
+
+</html>

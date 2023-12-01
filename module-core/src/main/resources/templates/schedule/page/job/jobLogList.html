@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 작업 로그 목록</title>
+  <link th:href="@{/style/schedule/job/jobLogList.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '작업', child = '로그 목록')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '작업 로그 목록', comment = ': 시스템에 등록된 작업 로그 목록을 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 작업 로그 테이블 영역 -->
+      <div class="area-job-log">
+        <table class="table-job-log">
+          <thead>
+            <tr>
+              <th class="th-log-seq">로그 번호</th>
+              <th class="th-job-seq">작업 번호</th>
+              <th class="th-log-result">로그 메시지</th>
+              <th class="th-log-state">로그 상태</th>
+              <th class="th-log-time">로그 시간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="log : ${results}"
+                th:with="jobDetailPage = @{/job/{jobSeq}(jobSeq = ${log.jobSeq})},
+                         jobLogDetailPage = @{/job/log/{logSeq}(logSeq = ${log.logSeq})}">
+              <td class="td-log-seq">
+                <a class="link-navy" th:text="${'#' + log.logSeq}" th:href="@{${jobLogDetailPage}}"></a>
+              </td>
+              <td class="td-job-seq">
+                <a class="link-navy" th:text="${'#' + log.jobSeq}" th:href="@{${jobDetailPage}}"></a>
+              </td>
+              <td class="td-log-result" th:text="${log.logResult}"></td>
+              <td class="td-log-state">
+                <span class="badge badge-dark" th:text="${log.logState}" />
+              </td>
+              <td class="td-log-time" th:text="${log.logTime}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 작업 로그 페이징 영역 -->
+      <div class="area-job-page">
+        <th:block th:replace="/schedule/page/job/tile/jobPage :: job-page-fragment" />
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

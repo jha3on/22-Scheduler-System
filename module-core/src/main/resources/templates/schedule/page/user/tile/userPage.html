@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="user-page-fragment">
+  <!-- 페이징 영역 -->
+  <div class="area-page">
+    <ul class="ul-area-page" th:with="start = ${T(java.lang.Math).floor(results.number / 10) * 10 + 1},
+                                      last = (${start + 9 < results.totalPages ? start + 9 : results.totalPages})">
+      <!-- 첫 페이지 -->
+      <li>
+        <a th:href="@{${url}(page=1, sort=${sort}, sortBy=${sortBy}, keyword=${keyword})}">
+          <span><i class="ic-arrow-first"></i></span>
+        </a>
+      </li>
+      <!-- 이전 페이지 -->
+      <li th:class="${results.first} ? 'disable'">
+        <a th:href="${results.first} ? '#' : @{${url}(page=${results.number}, sort=${sort}, sortBy=${sortBy}, keyword=${keyword})}">
+          <span><i class="ic-arrow-left"></i></span>
+        </a>
+      </li>
+      <!-- 페이지 번호 -->
+      <li th:each="middle: ${#numbers.sequence(start, last)}" th:class="${middle == results.number + 1} ? 'number active' : 'number'">
+        <a th:text="${middle}" th:href="@{${url}(page=${middle}, sort=${sort}, sortBy=${sortBy}, keyword=${keyword})}"></a>
+      </li>
+      <!-- 다음 페이지 -->
+      <li th:class="${results.last} ? 'disable'">
+        <a th:href="${results.last} ? '#' : @{${url}(page=${results.number + 2}, sort=${sort}, sortBy=${sortBy}, keyword=${keyword})}">
+          <span><i class="ic-arrow-right"></i></span>
+        </a>
+      </li>
+      <!-- 마지막 페이지 -->
+      <li>
+        <a th:href="@{${url}(page=${results.totalPages}, sort=${sort}, sortBy=${sortBy}, keyword=${keyword})}">
+          <span><i class="ic-arrow-last"></i></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</th:block>
+
+</html>

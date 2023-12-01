@@ -1,0 +1,81 @@
+server:
+  port: 8000
+  error:
+    # 기본 오류 페이지 경로
+    path: /error
+    # 스택 트레이스, 예외 내용
+    include-stacktrace: never
+    include-exception: false
+    whitelabel.enabled: false
+
+spring:
+  web:
+    # 리소스 파일 경로
+    resources.static-locations: file:module-core/src/main/resources/static/
+    resources.cache.period: 0
+  thymeleaf:
+    # 페이지 파일 경로
+    prefix: file:module-core/src/main/resources/templates/
+    suffix: .html
+    cache: false
+  data:
+    # 페이징 사이즈
+    web.pageable:
+      max-page-size: 10
+      default-page-size: 10
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: dreamy
+    url: jdbc:mariadb://localhost:3306/2208_scheduler_db
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+  quartz:
+    scheduler-name: scheduler
+    job-store-type: jdbc
+    jdbc:
+      # 쿼츠 테이블 스키마
+      schema: classpath:/schema.sql
+      # 쿼츠 테이블 초기화 (always | never)
+      initialize-schema: always
+    properties:
+      org.quartz:
+        scheduler:
+          instanceId: AUTO
+          instanceName: schedule-core
+          idleWaitTime: 1000
+          skipUpdateCheck: true
+          classLoadHelper:
+            class: org.quartz.simpl.CascadingClassLoadHelper
+        jobStore:
+          class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+          driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+          tablePrefix: quartz_
+          useProperties: true
+          misfireThreshold: 3000
+          acquireTriggersWithinLock: true
+          isClustered: true
+          clusterCheckinInterval: 10000
+        threadPool:
+          class: org.quartz.simpl.SimpleThreadPool
+          threadCount: 20
+          threadPriority: 5
+          threadNamePrefix: thread
+          threadsInheritContextClassLoaderOfInitializingThread: true
+  main.allow-bean-definition-overriding: true
+  mvc.throw-exception-if-no-handler-found: true
+  autoconfigure.exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
+schedule:
+  # 작업 파일 경로
+  local: file:module-core/build/module-core.jar
+  remote: file:module-remote/build/module-remote.jar
+
+logging:
+  level:
+    org.hibernate.SQL: debug

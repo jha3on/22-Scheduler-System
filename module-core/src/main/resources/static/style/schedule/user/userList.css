@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/* 사용자 목록 테이블 컬럼 스타일링 */
+.area-user-list .th-user-seq,
+.area-user-list .td-user-seq {
+  width: 3rem;
+  text-align: center;
+}
+.area-user-list .th-user-code,
+.area-user-list .td-user-code {
+  width: 6rem;
+  text-align: center;
+}
+.area-user-list .th-user-name,
+.area-user-list .td-user-name {
+  width: 6rem;
+}
+.area-user-list .th-user-email,
+.area-user-list .td-user-email {
+  width: 9rem;
+}
+.area-user-list .th-user-grade,
+.area-user-list .td-user-grade {
+  width: 3rem;
+  text-align: center;
+}
+.area-user-list .th-user-store,
+.area-user-list .td-user-store {
+  width: 3rem;
+  text-align: center;
+}
+
+
+
+
+/*<td class="td-user-state" th:with="type = ${T(app.early.core.domain.secure.enums.UserEntryType)}">*/
+/*<span th:if="${user.entryType == T(app.early.share.utility.AppUtils).capitalize(type.STORED.name)}" th:text="${user.entryType}" class="badge dark" />*/
+/*<span th:if="${user.entryType == #strings.capitalize(#strings.toLowerCase(type.DELETED.name))}" th:text="${user.entryType}" class="badge rose" />*/
+/*</td>*/

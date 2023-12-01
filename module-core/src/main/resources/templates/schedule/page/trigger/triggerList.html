@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 트리거 목록</title>
+  <link th:href="@{/style/schedule/trigger/triggerList.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard"
+           th:with="triggerStorePage = @{/trigger/store(jobName = ${jobName}, jobGroup = ${jobGroup})}">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '트리거', child = '목록')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '트리거 목록', comment = ': 작업과 연관된 트리거 목록을 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+        <li><button type="button" class="button-gray" th:text="${'트리거 등록'}" th:onclick="|location.href = '@{${triggerStorePage}}'|"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 트리거 목록 테이블 영역 -->
+      <div class="area-trigger-list">
+        <table class="table-trigger-list">
+          <thead>
+            <tr>
+              <th class="th-schedule-seq">스케줄 번호</th>
+              <th class="th-trigger-group">트리거 그룹</th>
+              <th class="th-trigger-name">트리거 이름</th>
+              <th class="th-trigger-register">트리거 소유자</th>
+              <th class="th-trigger-store">등록 유형</th>
+              <th class="th-trigger-state">상태 유형</th>
+              <th class="th-trigger-action">트리거 액션</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="trigger : ${results}"
+                th:with="jobDetailPage = @{/job/{jobSeq}(jobSeq = ${trigger.jobSeq})},
+                         triggerDetailPage = @{/trigger/{triggerSeq}(triggerSeq = ${trigger.triggerSeq})},
+                         pauseAction = |schedule.onTriggerPauseHandler('${trigger.jobName}', '${trigger.jobGroup}', '${trigger.triggerName}', '${trigger.triggerGroup}')|,
+                         resumeAction = |schedule.onTriggerResumeHandler('${trigger.jobName}', '${trigger.jobGroup}', '${trigger.triggerName}', '${trigger.triggerGroup}')|,
+                         deleteAction = |schedule.onTriggerDeleteHandler('${trigger.jobName}', '${trigger.jobGroup}', '${trigger.triggerName}', '${trigger.triggerGroup}')|,
+                         hasOwnership = ${#authentication.principal.user.gradeType.name == 'SYSOP' or #authentication.principal.user.userCode == trigger.triggerRegister},
+                         isUpdatable = ${trigger.triggerStore == 'STORED' and (trigger.triggerState != 'TERMINATED' and trigger.triggerState != 'DELETED')}">
+              <td class="td-schedule-seq">
+                <a class="link-navy" th:text="${'#' + trigger.jobSeq}" th:href="@{${jobDetailPage}}"></a>
+                <span class="text-colon">:</span>
+                <a class="link-navy" th:text="${'#' + trigger.triggerSeq}" th:href="@{${triggerDetailPage}}"></a>
+              </td>
+              <td id="triggerGroup" class="td-trigger-group" th:text="${trigger.triggerGroup}"></td>
+              <td id="triggerName" class="td-trigger-name" th:text="${trigger.triggerName}"></td>
+              <td class="td-trigger-register" th:text="${trigger.triggerRegister}"></td>
+              <td class="td-trigger-store">
+                <span class="badge badge-dark" th:text="${trigger.triggerStore}" th:if="${trigger.triggerStore == 'STORED'}" />
+                <span class="badge badge-rose" th:text="${trigger.triggerStore}" th:if="${trigger.triggerStore == 'DELETED'}" />
+              </td>
+              <td class="td-trigger-state">
+                <span class="badge badge-rose" th:text="${trigger.triggerState}" th:if="${trigger.triggerState == 'DELETED'}" />
+                <span class="badge badge-dark" th:text="${trigger.triggerState}" th:if="${trigger.triggerState != 'DELETED'}" />
+              </td>
+              <td class="td-trigger-action" th:if="${hasOwnership} == true">
+                <th:block th:if="${isUpdatable == true}">
+                  <span class="badge badge-dark clickable" th:text="${'정지'}" th:if="${trigger.triggerState != 'PAUSED'}" th:attr="onclick=|${pauseAction}|" />
+                  <span class="badge badge-dark clickable" th:text="${'재시작'}" th:if="${trigger.triggerState == 'PAUSED'}" th:attr="onclick=|${resumeAction}|" />
+                  <span class="badge badge-rose clickable" th:text="${'삭제'}" th:attr="onclick=|${deleteAction}|" />
+                </th:block>
+                <th:block th:if="${isUpdatable != true}">
+                  <span class="badge badge-dark" th:text="${'해당 없음'}" />
+                </th:block>
+              </td>
+              <td class="td-trigger-action" th:if="${hasOwnership} != true">
+                <span class="badge badge-dark" th:text="${'권한 없음'}" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 트리거 목록 테이블 검색 영역 -->
+      <div class="area-trigger-page-search">
+        <th:block th:replace="/schedule/page/trigger/tile/triggerPageSearch :: trigger-page-search-fragment" />
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

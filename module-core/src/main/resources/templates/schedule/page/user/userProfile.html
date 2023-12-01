@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 사용자 프로필</title>
+  <link th:href="@{/style/schedule/user/userProfile.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard"
+           th:with="userListPage = @{/user/list}">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '사용자', child = '프로필')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '사용자 프로필 (#' + ${user.userSeq} + ')', comment = ': 사용자의 상세 정보를 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-gray" th:text="${'사용자 목록'}" th:onclick="|location.href = '@{${userListPage}}'|"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 사용자 프로필 영역 -->
+      <div class="area-user-profile">
+        <form class="area-form-user-profile">
+          <!-- 사용자 프로필 기본 정보 -->
+          <div class="area-field-profile-default">
+            <div class="area-field-profile-default-left">
+              <h2 class="essential-asterisk">기본 정보</h2>
+              <p>: 사용자의 기본 정보를 확인합니다.</p>
+            </div>
+            <div class="area-field-profile-default-right">
+              <div class="area-field-user-seq">
+                <label for="userSeq">
+                  사용자 번호
+                  <input id="userSeq" class="user-seq" type="text" th:value="${user.userSeq}" readonly />
+                </label>
+              </div>
+              <div class="area-field-user-code">
+                <label for="userCode">
+                  사용자 사번
+                  <input id="userCode" class="user-code" type="text" th:value="${user.userCode}" readonly />
+                </label>
+              </div>
+              <div class="area-field-user-name">
+                <label for="userName">
+                  사용자 이름
+                  <input id="userName" class="user-name" type="text" th:value="${user.userName}" readonly />
+                </label>
+              </div>
+              <div class="area-field-user-email">
+                <label for="userEmail">
+                  사용자 이메일
+                  <input id="userEmail" class="user-email" type="text" th:value="${user.userEmail}" readonly />
+                </label>
+              </div>
+              <div class="area-field-user-store">
+                <span class="label-user-store">사용자 등록 상태</span>
+                <span class="badge badge-dark" th:text="${user.userStore}" th:if="${user.userStore.name == 'STORED'}" />
+                <span class="badge badge-rose" th:text="${user.userStore}" th:if="${user.userStore.name == 'DELETED'}" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 사용자 프로필 등급 정보 -->
+          <div class="area-field-profile-grade">
+            <div class="area-field-profile-grade-left">
+              <h2 class="essential-asterisk">등급 정보</h2>
+              <p>: 사용자의 등급 정보를 확인합니다.</p>
+            </div>
+            <div class="area-field-profile-grade-right">
+              <div class="area-field-user-grade">
+                <span class="label-user-grade">사용자 등급 유형</span>
+                <span class="badge badge-dark" th:text="${user.userGrade + ' 등급'}" />
+              </div>
+              <div class="area-field-user-role">
+                <span class="label-user-role">사용자 권한 유형</span>
+                <ul class="area-ul-user-role">
+                  <li th:each="userRole : ${user.userRoles}">
+                    <span class="badge badge-dark" th:text="${userRole + '(' + userRole.value + ')'}"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

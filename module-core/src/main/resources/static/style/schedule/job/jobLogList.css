@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+/* 작업 로그 테이블 컬럼 스타일링 */
+.area-job-log .th-log-seq,
+.area-job-log .td-log-seq,
+.area-job-log .th-job-seq,
+.area-job-log .td-job-seq {
+  width: 3rem;
+  text-align: center;
+}
+.area-job-log .th-log-result,
+.area-job-log .td-log-result {
+  width: 15rem;
+}
+.area-job-log .th-log-state,
+.area-job-log .td-log-state {
+  width: 3rem;
+  text-align: center;
+}
+.area-job-log .th-log-time,
+.area-job-log .td-log-time {
+  width: 6rem;
+  text-align: center;
+}

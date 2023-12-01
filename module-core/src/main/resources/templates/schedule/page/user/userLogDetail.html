@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 사용자 로그 조회</title>
+  <link th:href="@{/style/schedule/user/userLogDetail.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard"
+           th:with="userLogListPage = @{/user/log}">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '사용자', child = '로그 조회')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '사용자 로그 조회 (#' + ${log.logSeq} + ')', comment = ': 사용자 로그의 상세 정보를 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-gray" th:text="${'사용자 로그 목록'}" th:onclick="|location.href = '@{${userLogListPage}}'|"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 사용자 로그 영역 -->
+      <div class="area-user-log">
+        <!-- 사용자 로그 기본 정보 -->
+        <div class="area-log-default">
+          <div class="area-log-default-left">
+            <h2 class="essential-asterisk">기본 정보</h2>
+            <p>: 사용자 로그의 기본 정보를 확인합니다.</p>
+          </div>
+          <div class="area-log-default-right">
+            <div class="area-field-log-seq">
+              <label for="logSeq">
+                로그 번호
+                <input id="logSeq" class="log-seq" type="text" th:value="${log.logSeq}" readonly />
+              </label>
+            </div>
+            <div class="area-field-job-seq">
+              <label for="jobSeq">
+                작업 번호
+                <input id="jobSeq" class="job-seq" type="text" th:value="${log.jobSeq}" readonly />
+              </label>
+            </div>
+            <div class="area-field-trigger-seq">
+              <label for="logSeq">
+                트리거 번호
+                <input id="triggerSeq" class="trigger-seq" type="text" th:value="${log.triggerSeq}" readonly />
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- 사용자 로그 메시지 정보 -->
+        <div class="area-log-message">
+          <div class="area-log-message-left">
+            <h2 class="essential-asterisk">메시지 정보</h2>
+            <p>: 사용자 로그의 메시지 정보를 확인합니다.</p>
+          </div>
+          <div class="area-log-message-right">
+            <div class="area-field-log-result">
+              <label for="logResult">
+                로그 내용
+                <input id="logResult" class="log-result" type="text" th:value="${log.logResult}" readonly />
+              </label>
+            </div>
+            <div class="area-field-log-detail">
+              <label for="logDetail">
+                로그 상세 내용
+                <textarea id="logDetail" class="log-detail" type="text" th:text="${log.logDetail}" readonly></textarea>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- 사용자 로그 부가 정보 -->
+        <div class="area-log-extra">
+          <div class="area-log-extra-left">
+            <h2 class="essential-asterisk">부가 정보</h2>
+            <p>: 사용자 로그의 부가 정보를 확인합니다.</p>
+          </div>
+          <div class="area-log-extra-right">
+            <div class="area-log-register">
+              <span class="label-log-register">로그 등록자</span>
+              <span class="badge badge-dark" th:text="${log.logRegister}"></span>
+            </div>
+            <div class="area-log-type">
+              <span class="label-log-type">로그 유형</span>
+              <span class="badge badge-dark" th:text="${log.logType}"></span>
+            </div>
+            <div class="area-log-time">
+              <span class="label-log-time">로그 시간</span>
+              <span class="badge badge-dark" th:text="${log.logTime}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

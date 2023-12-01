@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+/* 트리거 목록 테이블 컬럼 스타일링 */
+.area-trigger-list .th-schedule-seq,
+.area-trigger-list .td-schedule-seq {
+  width: 6rem;
+  text-align: center;
+}
+.area-trigger-list .th-trigger-name,
+.area-trigger-list .th-trigger-group,
+.area-trigger-list .td-trigger-name,
+.area-trigger-list .td-trigger-group {
+  width: 6rem;
+  text-align: left;
+}
+.area-trigger-list .th-trigger-register,
+.area-trigger-list .td-trigger-register {
+  width: 3rem;
+  text-align: center;
+}
+.area-trigger-list .th-trigger-store,
+.area-trigger-list .td-trigger-store {
+  width: 3rem;
+  text-align: center;
+}
+.area-trigger-list .th-trigger-state,
+.area-trigger-list .td-trigger-state {
+  width: 3rem;
+  text-align: center;
+}
+.area-trigger-list .th-trigger-action,
+.area-trigger-list .td-trigger-action {
+  width: 6rem;
+  text-align: center;
+}

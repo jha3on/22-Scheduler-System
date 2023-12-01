@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="utf-8">
+  <title>스케줄 시스템</title>
+  <th:block th:replace="/schedule/partial/style :: style-fragment"></th:block>
+  <th:block th:replace="/schedule/partial/script :: script-fragment"></th:block>
+</head>
+
+<body>
+<main class="app">
+  <div class="area-app">
+    <th:block th:replace="/schedule/partial/header :: header-fragment"/>
+    <th:block th:replace="/schedule/partial/menu :: menu-fragment"/>
+    <th:block layout:fragment="content-fragment"/>
+  </div>
+</main>
+</body>
+
+</html>

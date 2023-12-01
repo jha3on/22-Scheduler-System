@@ -1,0 +1,4 @@
+rootProject.name = 'system'
+include 'module-core'
+include 'module-remote'
+

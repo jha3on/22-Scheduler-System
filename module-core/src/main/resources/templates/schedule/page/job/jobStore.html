@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 작업 등록</title>
+  <link th:href="@{/style/schedule/job/jobStore.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '작업', child = '등록')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '작업 등록', comment = ': 시스템에 새로운 작업을 등록합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.clearForm()" th:text="${'입력 초기화'}"></button></li>
+        <li><button type="button" class="button-gray" onclick="schedule.onJobStoreHandler()" th:text="${'작업 등록'}"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 작업 등록 영역 -->
+      <div class="area-job-store">
+        <form class="area-form-job-store">
+          <!-- 작업 등록 기본 정보 -->
+          <div class="area-field-job-default">
+            <div class="area-field-job-default-left">
+              <h2 class="essential-asterisk">기본 정보</h2>
+              <p>: 작업 이름, 그룹을 작성합니다.</p>
+            </div>
+            <div class="area-field-job-default-right">
+              <div class="area-field-job-name">
+                <label for="jobName">
+                  <input id="jobName" class="job-name" type="text" placeholder="작업 이름" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+              <div class="area-field-job-group">
+                <label for="jobGroup">
+                  <input id="jobGroup" class="job-group" type="text" placeholder="작업 그룹" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 작업 등록 실행 정보 -->
+          <div class="area-field-job-execution">
+            <div class="area-field-job-execution-left">
+              <h2 class="essential-asterisk">실행 정보</h2>
+              <p>: 작업 실행 대상을 작성합니다.</p>
+            </div>
+            <div class="area-field-job-execution-right">
+              <div class="area-field-job-class-type">
+                <label for="classType">
+                  <select id="classType" name="class-type" onchange="schedule.selectClassType()">
+                    <option th:each="type: ${T(system.core.enums.schedule.JobClassType).values()}"
+                            th:text="${type.value}"
+                            th:value="${type.name}">
+                  </select>
+                </label>
+              </div>
+              <div class="area-field-job-class-name">
+                <label for="className">
+                  <input id="className" class="class-name" type="text" placeholder="작업 대상 클래스" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+              <div class="area-field-job-class-comment">
+                <label for="classComment">
+                  <input id="classComment" class="class-comment" type="text" placeholder="작업 대상 설명" onblur="app.removeCheckMessage(this)" />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 작업 등록 데이터 정보 -->
+          <div class="area-field-job-data">
+            <div class="area-field-job-data-left">
+              <h2>데이터 정보</h2>
+              <p>: 작업 실행 데이터를 작성합니다.</p>
+            </div>
+            <div class="area-field-job-data-right">
+              <div class="area-field-job-class-data">
+                <label for="classData">
+                  <textarea id="classData" class="class-data" type="text" placeholder="작업 대상 데이터" onblur="app.removeCheckMessage(this)"></textarea>
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

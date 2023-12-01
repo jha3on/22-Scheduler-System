@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 사용자 매뉴얼</title>
+  <link th:href="@{/style/schedule/user/userManual.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '사용자', child = '매뉴얼')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '사용자 매뉴얼', comment = ': 시스템의 사용 매뉴얼을 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 사용자 매뉴얼 영역 -->
+      <div class="area-user-manual">
+        <!-- 사용자 영역 -->
+        <div class="area-manual-user">
+          <div class="area-manual-user-left">
+            <h2 class="essential-asterisk">사용자</h2>
+            <p>사용자 등급, 권한</p>
+          </div>
+          <div class="area-manual-user-right">
+            <ul class="ul-area-manual-user-note">
+              <li class="note-item">
+                <span>GUEST 등급은 작업, 트리거를 조회할 수 있습니다. (권한: R)</span>
+              </li>
+              <li class="note-item">
+                <span>SCHED 등급은 본인이 등록한 작업, 트리거를 관리할 수 있습니다. (권한: R, W, X)</span>
+              </li>
+              <li class="note-item">
+                <span>SYSOP 등급은 모든 사용자가 등록한 작업, 트리거를 관리할 수 있습니다. (권한: R, W, X, O)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 작업 영역 -->
+        <div class="area-manual-job">
+          <div class="area-manual-job-left">
+            <h2 class="essential-asterisk">작업</h2>
+            <p>작업 관리, 조회</p>
+          </div>
+          <div class="area-manual-job-right">
+            <ul class="ul-area-manual-job-note">
+              <li class="note-item">
+                <span>작업은 내부 모듈 또는 외부 모듈의 작업 클래스 경로를 입력하여 등록해야 합니다.</span>
+              </li>
+              <li class="note-item">
+                <span>작업을 등록한 이후에 트리거를 등록하여 작업을 실행할 수 있습니다.</span>
+              </li>
+              <li class="note-item">
+                <span>트리거가 등록되지 않은 작업은 [정지], [재시작] 상태를 변경할 수 없습니다.</span>
+              </li>
+              <li class="note-item">
+                <span>연관된 트리거가 실행 중인 경우 수정, 삭제할 수 없습니다.</span>
+              </li>
+              <li class="note-item">
+                <span>작업을 삭제할 때 연관된 모든 트리거는 삭제됩니다.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 트리거 영역 -->
+        <div class="area-manual-trigger">
+          <div class="area-manual-trigger-left">
+            <h2 class="essential-asterisk">트리거</h2>
+            <p>트리거 관리, 조회</p>
+          </div>
+          <div class="area-manual-trigger-right">
+            <ul class="ul-area-manual-trigger-note">
+              <li class="note-item">
+                <span>트리거는 실행 유형과 정책 유형을 동일한 유형으로 선택해야 합니다. (Simple, Cron)</span>
+              </li>
+              <li class="note-item">
+                <span>트리거는 각 작업에 여러 개를 등록할 수 있으나 1개의 작업을 동시 실행할 수 없습니다.</span>
+              </li>
+              <li class="note-item">
+                <span>트리거를 수정, 삭제할 때 해당 트리거만 수정, 삭제됩니다.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

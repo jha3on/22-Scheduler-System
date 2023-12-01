@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+/* 사용자 로그 테이블 컬럼 스타일링 */
+.area-user-log .th-log-seq,
+.area-user-log .td-log-seq {
+  width: 3rem;
+  text-align: center;
+}
+.area-user-log .th-schedule-seq,
+.area-user-log .td-schedule-seq {
+  width: 3rem;
+  text-align: center;
+}
+.area-user-log .th-log-result,
+.area-user-log .td-log-result {
+  width: 12rem;
+}
+.area-user-log .th-log-register,
+.area-user-log .td-log-register {
+  width: 3rem;
+  text-align: center;
+}
+.area-user-log .th-log-type,
+.area-user-log .td-log-type {
+  width: 3rem;
+  text-align: center;
+}
+.area-user-log .th-log-time,
+.area-user-log .td-log-time {
+  width: 6rem;
+  text-align: center;
+}

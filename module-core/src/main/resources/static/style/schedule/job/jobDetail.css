@@ -1,0 +1,106 @@
+@charset "utf-8";
+
+/**
+ * 작업 등록 영역
+ */
+.area-form-job-detail {
+  max-width: 60rem;
+}
+.area-form-job-detail .check {
+  display: block;
+  padding-top: 0.25rem;
+  padding-left: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.area-form-job-detail .class-data + .check {
+  padding-top: 0;
+}
+.area-form-job-detail h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.area-form-job-detail p {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.area-form-job-detail input {
+  width: 21rem;
+  height: 2.1rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+}
+.area-form-job-detail select {
+  width: 5rem;
+  height: 2.1rem;
+  padding: 0.25rem;
+}
+.area-form-job-detail textarea {
+  width: 42.5rem;
+  height: 21rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+}
+.area-form-job-detail input,
+.area-form-job-detail select,
+.area-form-job-detail textarea {
+  border: 1px solid var(--gray-500);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+}
+.area-form-job-detail .area-field-job-default,
+.area-form-job-detail .area-field-job-execution,
+.area-form-job-detail .area-field-job-data,
+.area-form-job-detail .area-field-job-extra {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: start;
+  flex-wrap: wrap;
+  max-width: 60rem;
+}
+.area-form-job-detail .area-field-job-default-left,
+.area-form-job-detail .area-field-job-execution-left,
+.area-form-job-detail .area-field-job-data-left,
+.area-form-job-detail .area-field-job-extra-left {
+  width: 15rem;
+  margin-right: 1rem;
+}
+.area-form-job-detail .area-field-job-default-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-job-detail .area-field-job-execution-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 43rem;
+}
+.area-form-job-detail .area-field-job-data-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-job-detail .area-field-job-extra-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-job-detail .area-field-job-class-name input {
+  width: 37rem;
+}
+.area-form-job-detail .area-field-job-class-comment input {
+  width: 42.5rem;
+}
+.area-form-job-detail .area-job-extra-right > div {
+  margin-bottom: 0.25rem;
+}
+.area-form-job-detail .label-job-register,
+.area-form-job-detail .label-job-store,
+.area-form-job-detail .label-job-state {
+  display: block;
+  margin-bottom: 0.15rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+}

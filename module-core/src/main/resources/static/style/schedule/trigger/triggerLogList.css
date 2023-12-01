@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+/* 트리거 로그 테이블 컬럼 스타일링 */
+.area-trigger-log .th-log-seq,
+.area-trigger-log .td-log-seq {
+  width: 3rem;
+  text-align: center;
+}
+.area-trigger-log .th-schedule-seq,
+.area-trigger-log .td-schedule-seq {
+  width: 4.5rem;
+  text-align: center;
+}
+.area-trigger-log .th-log-result,
+.area-trigger-log .td-log-result {
+  width: 15rem;
+}
+.area-trigger-log .th-log-state,
+.area-trigger-log .td-log-state {
+  width: 3rem;
+  text-align: center;
+}
+.area-trigger-log .th-log-time,
+.area-trigger-log .td-log-time {
+  width: 6rem;
+  text-align: center;
+}

@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/* 인증 헤더 스타일링 */
+.header-secure {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.header-secure .text-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+.header-secure .text-stack {
+  margin-top: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--gray-900);
+}
+
+/* 인증 푸터 스타일링 */
+.footer-secure {
+  text-align: center;
+}
+.footer-secure button {
+  width: auto;
+  font-size: 0.85rem;
+}

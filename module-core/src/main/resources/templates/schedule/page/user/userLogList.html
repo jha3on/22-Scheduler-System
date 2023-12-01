@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 사용자 로그 목록</title>
+  <link th:href="@{/style/schedule/user/userLogList.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '사용자', child = '로그 목록')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '사용자 로그 목록', comment = ': 사용자의 스케줄 등록과 수정, 삭제에 관한 로그를 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 사용자 로그 테이블 영역 -->
+      <div class="area-user-log">
+        <table class="table-user-log">
+          <thead>
+            <tr>
+              <th class="th-log-seq">로그 번호</th>
+              <th class="th-schedule-seq">스케줄 번호</th>
+              <th class="th-log-result">로그 메시지</th>
+              <th class="th-log-register">로그 사용자</th>
+              <th class="th-log-type">로그 유형</th>
+              <th class="th-log-time">로그 시간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="log : ${results}"
+                th:with="jobDetailPage = @{/job/{jobSeq}(jobSeq = ${log.jobSeq})},
+                         triggerDetailPage = @{/trigger/{triggerSeq}(triggerSeq = ${log.triggerSeq})},
+                         userLogDetailPage = @{/user/log/{logSeq}(logSeq = ${log.logSeq})}">
+              <td class="td-log-seq">
+                <a class="link-navy" th:text="${'#' + log.logSeq}" th:href="@{${userLogDetailPage}}"></a>
+              </td>
+              <td class="td-schedule-seq">
+                <a class="link-navy" th:text="${'#' + log.jobSeq}" th:href="@{${jobDetailPage}}"></a>
+                <span class="text-colon">:</span>
+                <a class="link-navy" th:text="${'#' + log.triggerSeq}" th:href="@{${triggerDetailPage}}"></a>
+              </td>
+              <td class="td-log-result" th:text="${log.logResult}"></td>
+              <td class="td-log-register" th:text="${log.logRegister}"></td>
+              <td class="td-log-type" th:switch="${log.logType}">
+                <span class="badge badge-dark" th:text="${log.logType}" th:case="${'STORED'}" />
+                <span class="badge badge-dark" th:text="${log.logType}" th:case="${'UPDATED'}" />
+                <span class="badge badge-rose" th:text="${log.logType}" th:case="${'DELETED'}" />
+              </td>
+              <td class="td-log-time" th:text="${log.logTime}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 사용자 로그 페이징 영역 -->
+      <div class="area-user-search">
+        <th:block th:replace="/schedule/page/user/tile/userPage :: user-page-fragment" />
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

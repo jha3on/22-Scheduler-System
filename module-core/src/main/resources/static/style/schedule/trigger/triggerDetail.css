@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+/**
+ * 트리거 등록 영역
+ */
+.area-form-trigger-detail {
+  max-width: 60rem;
+}
+.area-form-trigger-detail .check {
+  display: block;
+  padding-top: 0.25rem;
+  padding-left: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.area-form-trigger-detail h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.area-form-trigger-detail p {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.area-form-trigger-detail input {
+  width: 21rem;
+  height: 2.1rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+}
+.area-form-trigger-detail .repeat-expression {
+  width: 42.5rem;
+}
+.area-form-trigger-detail select {
+  width: 21rem;
+  height: 2.1rem;
+  padding: 0.25rem;
+}
+.area-form-trigger-detail input,
+.area-form-trigger-detail select {
+  border: 1px solid var(--gray-500);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+}
+.area-form-trigger-detail .area-field-trigger-default,
+.area-form-trigger-detail .area-field-trigger-execution,
+.area-form-trigger-detail .area-field-trigger-datetime,
+.area-form-trigger-detail .area-field-trigger-extra {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: start;
+  flex-wrap: wrap;
+  max-width: 60rem;
+}
+.area-form-trigger-detail .area-field-trigger-default-left,
+.area-form-trigger-detail .area-field-trigger-execution-left,
+.area-form-trigger-detail .area-field-trigger-datetime-left,
+.area-form-trigger-detail .area-field-trigger-extra-left {
+  width: 15rem;
+  margin-right: 1rem;
+}
+.area-form-trigger-detail .area-field-trigger-default-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 43rem;
+}
+.area-form-trigger-detail .area-field-trigger-execution-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 43rem;
+}
+.area-form-trigger-detail .area-field-trigger-datetime-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-trigger-detail .area-field-trigger-extra-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.area-form-trigger-detail .area-trigger-extra-right > div {
+  margin-bottom: 0.25rem;
+}
+.area-form-trigger-detail .label-trigger-register,
+.area-form-trigger-detail .label-trigger-store,
+.area-form-trigger-detail .label-trigger-state,
+.area-form-trigger-detail .label-trigger-prev-time,
+.area-form-trigger-detail .label-trigger-next-time {
+  display: block;
+  margin-bottom: 0.15rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+}

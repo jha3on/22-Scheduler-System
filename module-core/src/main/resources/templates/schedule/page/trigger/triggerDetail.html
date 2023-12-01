@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 트리거 조회</title>
+  <link th:href="@{/style/schedule/trigger/triggerDetail.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard"
+           th:with="triggerLogListPage = @{/trigger/{triggerSeq}/log(triggerSeq = ${trigger.triggerSeq})},
+                    hasOwnership = ${#authentication.principal.user.gradeType.name == 'SYSOP' or #authentication.principal.user.userCode == trigger.triggerRegister},
+                    isUpdatable = ${trigger.triggerStore == 'STORED' and (trigger.triggerState != 'TERMINATED' and trigger.triggerState != 'DELETED')}">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '트리거', child = '조회')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '트리거 조회 (#' + ${trigger.jobSeq} + ':#' + ${trigger.triggerSeq} + ')', comment = ': 트리거 정보를 조회, 수정합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+        <li th:if="${hasOwnership} == true and ${isUpdatable} == true"><button type="button" class="button-navy" onclick="app.clearForm()" th:text="${'입력 초기화'}"></button></li>
+        <li th:if="${hasOwnership} == true and ${isUpdatable} == true"><button type="button" class="button-gray" onclick="schedule.onTriggerUpdateHandler()" th:text="${'트리거 수정'}"></button></li>
+        <li><button type="button" class="button-gray" th:text="${'트리거 로그'}" th:onclick="|location.href = '@{${triggerLogListPage}}'|"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 트리거 조회 영역 -->
+      <div class="area-trigger-detail">
+        <form class="area-form-trigger-detail">
+          <!-- 트리거 조회 기본 정보 -->
+          <div class="area-field-trigger-default">
+            <div class="area-field-trigger-default-left">
+              <h2 class="essential-asterisk">기본 정보</h2>
+              <p>: 작업 이름, 그룹을 확인합니다.</p>
+              <p>: 트리거 이름, 그룹을 확인합니다.</p>
+            </div>
+            <div class="area-field-trigger-default-right">
+              <div class="area-field-job-name">
+                <label for="jobName">
+                  <input id="jobName" class="job-name" type="text" th:value="${trigger.jobName}" readonly />
+                </label>
+              </div>
+              <div class="area-field-job-group">
+                <label for="jobGroup">
+                  <input id="jobGroup" class="job-group" type="text" th:value="${trigger.jobGroup}" readonly />
+                </label>
+              </div>
+              <div class="area-field-trigger-name">
+                <label for="jobGroup">
+                  <input id="triggerName" class="trigger-name" type="text" th:value="${trigger.triggerName}" readonly />
+                </label>
+              </div>
+              <div class="area-field-trigger-group">
+                <label for="jobGroup">
+                  <input id="triggerGroup" class="trigger-group" type="text" th:value="${trigger.triggerGroup}" readonly />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 트리거 조회 실행 정보 -->
+          <div class="area-field-trigger-execution">
+            <div class="area-field-trigger-execution-left">
+              <h2 class="essential-asterisk">실행 정보</h2>
+              <p>: 트리거 실행 유형과 정책을 확인합니다.</p>
+              <p>: 트리거 반복 실행 조건을 확인합니다.</p>
+            </div>
+            <div class="area-field-trigger-execution-right">
+              <div class="area-field-trigger-class-type">
+                <label for="classType">
+                  <select id="classType" name="class-type"
+                          th:disabled="${hasOwnership != true or isUpdatable != true}">
+                    <option th:each="type: ${T(system.core.enums.schedule.TriggerClassType).values()}"
+                            th:text="${type.value}"
+                            th:value="${type.name}"
+                            th:selected="${type.name} == ${trigger.triggerClass}">
+                  </select>
+                </label>
+              </div>
+              <div class="area-field-trigger-policy-type">
+                <label for="policyType">
+                  <select id="policyType" name="policy-type"
+                          th:disabled="${hasOwnership != true or isUpdatable != true}">
+                    <option th:each="type: ${T(system.core.enums.schedule.TriggerPolicyType).values()}"
+                            th:text="${type.value}"
+                            th:value="${type.name}"
+                            th:selected="${type.name} == ${trigger.triggerPolicy}">
+                  </select>
+                </label>
+              </div>
+              <div class="area-field-repeat-count">
+                <label for="repeatCount">
+                  <input id="repeatCount" class="repeat-count" type="text" placeholder="(SP) 반복 실행 횟수" onblur="app.removeCheckMessage(this)"
+                         th:value="${trigger.repeatCount}"
+                         th:readonly="${hasOwnership != true or isUpdatable != true}" />
+                </label>
+              </div>
+              <div class="area-field-repeat-interval">
+                <label for="repeatInterval">
+                  <input id="repeatInterval" class="repeat-interval" type="text" placeholder="(SP) 반복 실행 간격 (초 단위)" onblur="app.removeCheckMessage(this)"
+                         th:value="${trigger.repeatInterval}"
+                         th:readonly="${hasOwnership != true or isUpdatable != true}" />
+                </label>
+              </div>
+              <div class="area-field-repeat-expression">
+                <label for="repeatExpression">
+                  <input id="repeatExpression" class="repeat-expression" type="text" placeholder="(CR) 반복 실행 표현식" onblur="app.removeCheckMessage(this)"
+                         th:value="${trigger.repeatExpression}"
+                         th:readonly="${hasOwnership != true or isUpdatable != true}" />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 트리거 조회 시간 정보 -->
+          <div class="area-field-trigger-datetime">
+            <div class="area-field-trigger-datetime-left">
+              <h2 class="essential-asterisk">시간 정보</h2>
+              <p>: 트리거 시작, 종료 시간을 확인합니다.</p>
+            </div>
+            <div class="area-field-trigger-datetime-right">
+              <div class="area-field-start-time">
+                <label for="startTime">
+                  <input id="startTime" class="start-time" type="text" placeholder="시작 시간" oninput="app.formatDateTime(this)" onblur="app.removeCheckMessage(this)"
+                         th:value="${trigger.startTime}"
+                         th:readonly="${hasOwnership != true or isUpdatable != true}" />
+                </label>
+              </div>
+              <div class="area-field-stop-time">
+                <label for="stopTime">
+                  <input id="stopTime" class="stop-time" type="text" placeholder="종료 시간" oninput="app.formatDateTime(this)" onblur="app.removeCheckMessage(this)"
+                         th:value="${trigger.stopTime}"
+                         th:readonly="${hasOwnership != true or isUpdatable != true}" />
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- 트리거 조회 부가 정보 -->
+          <div class="area-field-trigger-extra">
+            <div class="area-field-trigger-extra-left">
+              <h2 class="essential-asterisk">부가 정보</h2>
+              <p>: 트리거 부가 정보를 확인합니다.</p>
+            </div>
+            <div class="area-field-trigger-extra-right">
+              <div class="area-field-job-register">
+                <span class="label-trigger-register">트리거 소유자</span>
+                <span class="badge badge-dark" th:text="${trigger.triggerRegister}"></span>
+              </div>
+              <div class="area-field-trigger-store">
+                <span class="label-trigger-store">등록 유형</span>
+                <span class="badge badge-dark" th:text="${trigger.triggerStore}" th:if="${trigger.triggerStore == 'STORED'}" />
+                <span class="badge badge-rose" th:text="${trigger.triggerStore}" th:if="${trigger.triggerStore == 'DELETED'}" />
+              </div>
+              <div class="area-field-trigger-state">
+                <span class="label-trigger-state">상태 유형</span>
+                <span class="badge badge-rose" th:text="${trigger.triggerState}" th:if="${trigger.triggerState == 'TERMINATED' or trigger.triggerState == 'DELETED'}" />
+                <span class="badge badge-dark" th:text="${trigger.triggerState}" th:if="${trigger.triggerState != 'TERMINATED' and trigger.triggerState != 'DELETED'}" />
+              </div>
+              <div class="area-field-trigger-prev-time">
+                <span class="label-trigger-prev-time">이전 실행 시간</span>
+                <th:block th:if="${#strings.equals('', trigger.prevFireTime)}">
+                  <span class="badge badge-dark" th:text="${'0000-00-00 00:00:00'}"></span>
+                </th:block>
+                <th:block th:if="${!#strings.equals('', trigger.prevFireTime)}">
+                  <span class="badge badge-dark" th:text="${trigger.prevFireTime}"></span>
+                </th:block>
+              </div>
+              <div class="area-field-trigger-next-time">
+                <span class="label-trigger-next-time">다음 실행 시간</span>
+                <th:block th:if="${#strings.equals('', trigger.nextFireTime)}">
+                  <span class="badge badge-dark" th:text="${'0000-00-00 00:00:00'}"></span>
+                </th:block>
+                <th:block th:if="${!#strings.equals('', trigger.nextFireTime)}">
+                  <span class="badge badge-dark" th:text="${trigger.nextFireTime}"></span>
+                </th:block>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{secure/layout}">
+
+<head>
+  <title>스케줄러 :: 사용자 로그인</title>
+  <link th:href="@{/style/secure/userLogin.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 사용자 로그인 영역 -->
+  <section class="area-user-login">
+    <!-- 사용자 로그인 영역 컨테이너 -->
+    <div class="container-area-user-login">
+
+      <!-- 사용자 로그인 영역 상단 -->
+      <div class="area-user-login-top">
+        <img class="image-logo" src="/image/logo.svg" alt="logo" />
+        <h2 class="text-title">사용자 로그인</h2>
+        <p class="text-comment">시스템에 등록한 정보를 입력하세요.</p>
+      </div>
+
+      <!-- 사용자 로그인 영역 중간 -->
+      <div class="area-user-login-center">
+        <form class="area-form-user-login">
+          <div class="area-user-email">
+            <label for="userEmail">
+              <span class="label-user-email essential">로그인 이메일</span>
+              <input id="userEmail" type="text" placeholder="이메일을 입력하세요." />
+            </label>
+          </div>
+          <div class="area-user-password">
+            <label for="userPassword">
+              <span class="label-user-password essential">로그인 비밀번호</span>
+              <input id="userPassword" type="password" placeholder="비밀번호를 입력하세요." />
+            </label>
+          </div>
+          <div class="area-user-login-button">
+            <button type="button" class="button-navy" onclick="secure.onLoginHandler()">
+              사용자 로그인
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- 사용자 로그인 영역 하단 -->
+      <div class="area-user-login-bottom">
+        <button type="button" class="button-gray" th:onclick="|location.href='@{/user/sign}'|">
+          사용자 등록
+        </button>
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>

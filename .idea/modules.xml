@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-core/module-core.system.module-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-core/module-core.system.module-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-remote/module-remote.system.module-remote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-remote/module-remote.system.module-remote.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-core/scheduler-system.module-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-core/scheduler-system.module-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-remote/scheduler-system.module-remote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-remote/scheduler-system.module-remote.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-core/system.module-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-core/system.module-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-remote/system.module-remote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-remote/system.module-remote.main.iml" />
+    </modules>
+  </component>
+</project>

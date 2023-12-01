@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{schedule/layout}">
+
+<head>
+  <title>스케줄 시스템 :: 작업 목록</title>
+  <link th:href="@{/style/schedule/job/jobList.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content-fragment">
+  <!-- 대시보드 본문 영역 -->
+  <section class="area-dashboard"
+           th:with="jobStorePage = @{/job/store}">
+    <!-- 대시보드 메뉴 경로 영역 -->
+    <th:block th:replace="/schedule/partial/route :: route-fragment(parent = '작업', child = '목록')" />
+    <!-- 대시보드 제목 영역 -->
+    <th:block th:replace="/schedule/partial/title :: title-fragment(title = '작업 목록', comment = ': 시스템에 등록된 작업 목록을 조회합니다.')" />
+    <!-- 대시보드 액션 버튼 영역 -->
+    <div class="area-dashboard-action">
+      <ul>
+        <li><button type="button" class="button-navy" onclick="app.backward()"><i class="ic-arrow-left"></i></button></li>
+        <li><button type="button" class="button-navy" onclick="app.refresh()"><i class="ic-refresh"></i></button></li>
+        <li><button type="button" class="button-gray" th:text="${'작업 등록'}" th:onclick="|location.href = '@{${jobStorePage}}'|"></button></li>
+      </ul>
+    </div>
+    <!-- 대시보드 내용 영역 -->
+    <div class="area-dashboard-content">
+      <!-- 작업 목록 테이블 영역 -->
+      <div class="area-job-list">
+        <table class="table-job-list">
+          <thead>
+            <tr>
+              <th class="th-job-seq">작업 번호</th>
+              <th class="th-job-group">작업 그룹</th>
+              <th class="th-job-name">작업 이름</th>
+              <th class="th-job-register">작업 소유자</th>
+              <th class="th-job-store">등록 유형</th>
+              <th class="th-job-state">상태 유형</th>
+              <th class="th-job-action">작업 액션</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="job : ${results}"
+                th:with="jobDetailPage = @{/job/{jobSeq}(jobSeq = ${job.jobSeq})},
+                         pauseAction = |schedule.onJobPauseHandler('${job.jobName}', '${job.jobGroup}')|,
+                         resumeAction = |schedule.onJobResumeHandler('${job.jobName}', '${job.jobGroup}')|,
+                         deleteAction = |schedule.onJobDeleteHandler('${job.jobName}', '${job.jobGroup}')|,
+                         hasOwnership = ${#authentication.principal.user.gradeType.name == 'SYSOP' or #authentication.principal.user.userCode == job.jobRegister},
+                         isUpdatable = ${job.jobStore == 'STORED' and job.jobState != 'DELETED'}">
+              <td class="td-job-seq">
+                <a class="link-navy" th:text="${'#' + job.jobSeq}" th:href="@{${jobDetailPage}}"></a>
+              </td>
+              <td class="td-job-group" th:text="${job.jobGroup}"></td>
+              <td class="td-job-name" th:text="${job.jobName}"></td>
+              <td class="td-job-register" th:text="${job.jobRegister}"></td>
+              <td class="td-job-store">
+                <span class="badge badge-dark" th:text="${job.jobStore}" th:if="${job.jobStore == 'STORED'}" />
+                <span class="badge badge-rose" th:text="${job.jobStore}" th:if="${job.jobStore == 'DELETED'}" />
+              </td>
+              <td class="td-job-state">
+                <span class="badge badge-rose" th:text="${job.jobState}" th:if="${job.jobState == 'DELETED'}" />
+                <span class="badge badge-dark" th:text="${job.jobState}" th:if="${job.jobState != 'DELETED'}" />
+              </td>
+              <td class="td-job-action" th:if="${hasOwnership} == true">
+                <th:block th:if="${isUpdatable == true}">
+                  <span class="badge badge-dark clickable" th:text="${'정지'}" th:if="${job.jobState != 'PAUSED'}" th:attr="onclick=|${pauseAction}|" />
+                  <span class="badge badge-dark clickable" th:text="${'재시작'}" th:if="${job.jobState == 'PAUSED'}" th:attr="onclick=|${resumeAction}|" />
+                  <span class="badge badge-rose clickable" th:text="${'삭제'}" th:attr="onclick=|${deleteAction}|" />
+                </th:block>
+                <th:block th:if="${isUpdatable != true}">
+                  <span class="badge badge-dark" th:text="${'해당 없음'}" />
+                </th:block>
+              </td>
+              <td class="td-job-action" th:if="${hasOwnership} != true">
+                <span class="badge badge-dark" th:text="${'권한 없음'}" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 작업 목록 테이블 검색 영역 -->
+      <div class="area-job-page-search">
+        <th:block th:replace="/schedule/page/job/tile/jobPageSearch :: job-page-search-fragment" />
+      </div>
+    </div>
+  </section>
+</th:block>
+
+</html>
