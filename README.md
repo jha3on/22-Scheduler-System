@@ -41,7 +41,6 @@
 ![Alt text](./github/22-01-09.png)
 ![Alt text](./github/22-01-10.png)
 ![Alt text](./github/22-01-11.png)
-![Alt text](./github/22-01-12.png)
 </div>
 <br>
 
