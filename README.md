@@ -126,11 +126,11 @@
   > [system.core.service.schedule.job.JobUtils.java](https://github.com/jha3on/22-Scheduler-System/blob/master/module-core/src/main/java/system/core/service/schedule/job/JobUtils.java) <br>
   > [system.core.service.schedule.trigger.TriggerUtils.java](https://github.com/jha3on/22-Scheduler-System/blob/master/module-core/src/main/java/system/core/service/schedule/trigger/TriggerUtils.java) <br>
 #### 4) 일부 Cron 표현식을 파싱하지 못하는 문제
-- Quartz 라이브러리의 Cron 표현식을 검증하는 API는 느슨하게 구현되어 있어서 일부 잘못된 식을 확인하지 못한다.
-  > https://stackoverflow.com/questions/52252273 <br>
-- cron-utils 라이브러리를 대체 용도로 사용하였으나 Cron 표현식을 정의하는 방식이 일부 다르기 때문에 문제가 발생하였다.<br>
-  (cron-utils 라이브러리는 CRON4J, QUARTZ, UNIX, SPRING, SPRING53 5가지 방식으로 구분하고 있다.)
-  > https://mvnrepository.com/artifact/com.cronutils/cron-utils <br>
+- Quartz 라이브러리의 Cron 표현식을 검증하는 API는 느슨하게 구현되어 있어서 일부 잘못된 식을 확인하지 못한다. <br>
+  https://stackoverflow.com/questions/52252273 <br>
+- cron-utils 라이브러리를 대체 용도로 사용하였으나 Cron 표현식을 정의하는 방식이 일부 다르기 때문에 문제가 발생하였다. <br>
+  (cron-utils 라이브러리는 CRON4J, QUARTZ, UNIX, SPRING, SPRING53 5가지 방식으로 구분하고 있다.) <br>
+  https://mvnrepository.com/artifact/com.cronutils/cron-utils <br>
 
   ```
   TriggerValidator 클래스에서 QUARTZ 방식의 Cron 표현식을 검증하는 cron-utils 라이브러리를 사용하였다.
@@ -138,9 +138,8 @@
   > [system.core.service.schedule.trigger.TriggerValidator.java](https://github.com/jha3on/22-Scheduler-System/blob/master/module-core/src/main/java/system/core/service/schedule/trigger/TriggerValidator.java) <br>
 #### 5) 외부 모듈(.jar 파일)의 경로를 찾지 못하는 문제
 - 스케줄러 시스템과 독립된 상태로 작업 클래스만 빌드할 수 있도록 외부 모듈로 분리해야 한다.
-- 위의 내용과 클래스패스에 외부 .jar 파일을 등록하는 방법은 아래 문서를 참고하였다.
-
-  > https://homoefficio.github.io/2019/09/28/Quartz-스케줄러-적용-아키텍처-개선-1 <br>
-  > https://github.com/HomoEfficio/dev-tips/blob/master/IntelliJ%20외부%20jar%20파일을%20클래스패스에%20추가하는%20방법.md <br>
+- 위의 내용과 클래스패스에 외부 .jar 파일을 등록하는 방법은 아래 문서를 참고하였다. <br>
+  https://homoefficio.github.io/2019/09/28/Quartz-스케줄러-적용-아키텍처-개선-1 <br>
+  https://github.com/HomoEfficio/dev-tips/blob/master/IntelliJ%20외부%20jar%20파일을%20클래스패스에%20추가하는%20방법.md <br>
 </div>
 <br>
