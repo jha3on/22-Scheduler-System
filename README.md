@@ -128,7 +128,7 @@
 #### 4) 일부 Cron 표현식을 파싱하지 못하는 문제
 - Quartz 라이브러리의 Cron 표현식을 검증하는 API는 느슨하게 구현되어 있어서 일부 잘못된 식을 확인하지 못한다. <br>
   https://stackoverflow.com/questions/52252273 <br>
-- cron-utils 라이브러리를 대체 용도로 사용하였으나 Cron 표현식을 정의하는 방식이 일부 다르기 때문에 문제가 발생하였다. <br>
+- cron-utils 라이브러리를 대체 용도로 사용하였으나 Cron 표현식을 정의하는 규칙이 일부 다르기 때문에 문제가 발생하였다. <br>
   (cron-utils 라이브러리는 CRON4J, QUARTZ, UNIX, SPRING, SPRING53 5가지 방식으로 구분하고 있다.) <br>
   https://mvnrepository.com/artifact/com.cronutils/cron-utils <br>
 
