@@ -24,6 +24,10 @@
 - <p><b>OS: </b>Windows (11, 64 Bit)</p>
 - <p><b>DB: </b>Maria DB</p>
 - <p><b>IDE: </b>IntelliJ</p>
+|       라이브러리        | 사용 목적                                                                    |
+|:------------------:|--------------------------------------------------------------------------|
+|   `quartz@2.3.2`   | 실행 조건을 동적으로 결정하고 상세 내역을 DB 데이터로 관리하기 위해 사용하였다. |
+| `cron-utils@9.2.0` | Cron 표현식의 규칙을 정의하는 여러 방식 중, Quartz 라이브러리와 호환되는 유효성 검증 API를 사용하기 위해 사용하였다. |
 </div>
 <br>
 
@@ -122,12 +126,14 @@
   > [system.core.service.schedule.job.JobUtils.java](https://github.com/jha3on/22-Scheduler-System/blob/master/module-core/src/main/java/system/core/service/schedule/job/JobUtils.java) <br>
   > [system.core.service.schedule.trigger.TriggerUtils.java](https://github.com/jha3on/22-Scheduler-System/blob/master/module-core/src/main/java/system/core/service/schedule/trigger/TriggerUtils.java) <br>
 #### 4) 일부 Cron 표현식을 파싱하지 못하는 문제
-- Cron 표현식을 정의하는 방식이 일부 다르기 때문에 문제가 발생하였다.<br>
+- Quartz 라이브러리의 Cron 표현식을 검증하는 API는 느슨하게 구현되어 있어서 일부 잘못된 식을 확인하지 못한다.
+- cron-utils 라이브러리를 대체 용도로 사용하였으나 Cron 표현식을 정의하는 방식이 일부 다르기 때문에 문제가 발생하였다.<br>
   (cron-utils 라이브러리는 CRON4J, QUARTZ, UNIX, SPRING, SPRING53 5가지 방식으로 구분하고 있다.)
 
   ```
   TriggerValidator 클래스에서 QUARTZ 방식의 Cron 표현식을 검증하는 cron-utils 라이브러리를 사용하였다.
   ```
+  > https://stackoverflow.com/questions/52252273 <br>
   > [system.core.service.schedule.trigger.TriggerValidator.java](https://github.com/jha3on/22-Scheduler-System/blob/master/module-core/src/main/java/system/core/service/schedule/trigger/TriggerValidator.java) <br>
   > https://mvnrepository.com/artifact/com.cronutils/cron-utils <br>
 #### 5) 외부 모듈(.jar 파일)의 경로를 찾지 못하는 문제
